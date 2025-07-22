@@ -37,7 +37,17 @@ namespace ThirdProject
                 return $"Minutes: {Minutes}, Seconds: {Seconds}";
             return $"Seconds: {Seconds}";
         }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Duration others)
+                return this.Hours == others.Hours && this.Minutes == others.Minutes && this.Seconds == others.Seconds;
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return Hours.GetHashCode() + Minutes.GetHashCode() + Seconds.GetHashCode();
 
+        }
         public static Duration operator +(Duration a, Duration b) => new Duration(a.ToSeconds() + b.ToSeconds());
         public static Duration operator +(Duration a, int seconds) => new Duration(a.ToSeconds() + seconds);
         public static Duration operator +(int seconds, Duration a) => new Duration(a.ToSeconds() + seconds);
@@ -45,12 +55,12 @@ namespace ThirdProject
 
         public static Duration operator ++(Duration d) => new Duration(d.ToSeconds() + 60);
         public static Duration operator --(Duration d) => new Duration(d.ToSeconds() - 60);
-      
+
         public static bool operator >(Duration a, Duration b) => a.ToSeconds() > b.ToSeconds();
         public static bool operator <(Duration a, Duration b) => a.ToSeconds() < b.ToSeconds();
         public static bool operator >=(Duration a, Duration b) => a.ToSeconds() >= b.ToSeconds();
         public static bool operator <=(Duration a, Duration b) => a.ToSeconds() <= b.ToSeconds();
-     
+
         public static explicit operator DateTime(Duration d) => DateTime.Today.AddSeconds(d.ToSeconds());
 
         private int ToSeconds() => Hours * 3600 + Minutes * 60 + Seconds;

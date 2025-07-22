@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C__OOP05
+namespace test
 {
     public class Point3D : IComparable<Point3D>, ICloneable
     {

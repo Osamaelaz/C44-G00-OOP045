@@ -10,6 +10,11 @@
             D1 = new Duration(3600);
             Console.WriteLine(D1);
 
+            Duration O = new Duration(3600);
+            Console.WriteLine("Equals(): " + O.Equals(D1));
+            Console.WriteLine("D1.GetHashCode() :" + D1.GetHashCode());
+            Console.WriteLine("O.GetHashCode() :" + O.GetHashCode());
+
             Duration D2 = new Duration(7800);
             Console.WriteLine(D2);
 
